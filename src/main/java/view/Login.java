@@ -99,6 +99,7 @@ public class Login extends JFrame {
 	private JLabel lblNewLabel_24;
 	private JTextField textField_15;
 	private JButton btnNewButton_11;
+	private JButton btnNewButton_12;
 
 	/**
 	 * Launch the application.
@@ -210,9 +211,11 @@ public class Login extends JFrame {
 		btnNewButton_2 = new JButton("New button");
 		
 		btnNewButton_3 = new JButton("New button");
+		
+		btnNewButton_12 = new JButton("New button");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
+			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(18)
 					.addComponent(table, GroupLayout.PREFERRED_SIZE, 1062, GroupLayout.PREFERRED_SIZE)
@@ -274,9 +277,11 @@ public class Login extends JFrame {
 							.addComponent(lblNewLabel_13, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblNewLabel_11, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)))
-					.addGap(308))
-				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+							.addComponent(lblNewLabel_11, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+							.addGap(84)
+							.addComponent(btnNewButton_12)))
+					.addGap(301))
+				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(120)
 					.addComponent(btnNewButton)
 					.addGap(133)
@@ -292,8 +297,8 @@ public class Login extends JFrame {
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(15)
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 							.addGroup(gl_panel.createSequentialGroup()
 								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 									.addGroup(gl_panel.createSequentialGroup()
@@ -333,7 +338,9 @@ public class Login extends JFrame {
 													.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 											.addGroup(gl_panel.createSequentialGroup()
 												.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(lblNewLabel_11)
+												.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+													.addComponent(lblNewLabel_11)
+													.addComponent(btnNewButton_12))
 												.addGap(14)))
 										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 											.addGroup(gl_panel.createSequentialGroup()
@@ -357,11 +364,11 @@ public class Login extends JFrame {
 									.addComponent(btnNewButton, Alignment.TRAILING)
 									.addComponent(btnNewButton_2, Alignment.TRAILING))
 								.addGap(10))
-							.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createSequentialGroup()
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addComponent(btnNewButton_1)
 								.addGap(11)))
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+						.addGroup(gl_panel.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnNewButton_3)
 							.addGap(11)))
