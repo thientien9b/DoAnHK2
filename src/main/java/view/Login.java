@@ -41,7 +41,6 @@ public class Login extends JFrame {
 	private JLabel lblNewLabel_8;
 	private JLabel lblNewLabel_9;
 	private JLabel lblNewLabel_10;
-	private JLabel lblNewLabel_11;
 	private JLabel lblNewLabel_13;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -173,8 +172,6 @@ public class Login extends JFrame {
 		
 		lblNewLabel_10 = new JLabel("M\u00E3 L\u01B0\u01A1ng :");
 		
-		lblNewLabel_11 = new JLabel("M\u00E3 NV:");
-		
 		lblNewLabel_13 = new JLabel("M\u00E3 NV:");
 		
 		textField = new JTextField();
@@ -274,13 +271,8 @@ public class Login extends JFrame {
 							.addComponent(textField_7, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblNewLabel_13, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblNewLabel_11, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-							.addGap(84)
-							.addComponent(btnNewButton_12)))
-					.addGap(301))
+							.addComponent(lblNewLabel_13, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)))
+					.addGap(308))
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(120)
 					.addComponent(btnNewButton)
@@ -316,32 +308,24 @@ public class Login extends JFrame {
 											.addGroup(gl_panel.createSequentialGroup()
 												.addPreferredGap(ComponentPlacement.UNRELATED)
 												.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+										.addGap(12)
+										.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+											.addComponent(lblNewLabel_3)
+											.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
 										.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
 											.addGroup(gl_panel.createSequentialGroup()
-												.addGap(12)
-												.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-													.addComponent(lblNewLabel_3)
-													.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-												.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-												.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-													.addGroup(gl_panel.createSequentialGroup()
-														.addComponent(lblNewLabel_4)
-														.addGap(27))
-													.addGroup(gl_panel.createSequentialGroup()
-														.addComponent(rdbtnNewRadioButton_1)
-														.addGap(17))
-													.addGroup(gl_panel.createSequentialGroup()
-														.addComponent(rdbtnNewRadioButton)
-														.addGap(17)))
-												.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-													.addComponent(lblNewLabel_5)
-													.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+												.addComponent(lblNewLabel_4)
+												.addGap(27))
 											.addGroup(gl_panel.createSequentialGroup()
-												.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-													.addComponent(lblNewLabel_11)
-													.addComponent(btnNewButton_12))
-												.addGap(14)))
+												.addComponent(rdbtnNewRadioButton_1)
+												.addGap(17))
+											.addGroup(gl_panel.createSequentialGroup()
+												.addComponent(rdbtnNewRadioButton)
+												.addGap(17)))
+										.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+											.addComponent(lblNewLabel_5)
+											.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 											.addGroup(gl_panel.createSequentialGroup()
 												.addGap(18)
