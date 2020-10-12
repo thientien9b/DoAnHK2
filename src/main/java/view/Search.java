@@ -16,7 +16,7 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 
-public class Sreach extends JFrame {
+public class Search extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtIdAndName;
@@ -29,7 +29,7 @@ public class Sreach extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Sreach frame = new Sreach();
+					Search frame = new Search();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +41,7 @@ public class Sreach extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Sreach() {
+	public Search() {
 		setForeground(new Color(0, 191, 255));
 		setUndecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
