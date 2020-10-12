@@ -22,7 +22,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
 
-public class Login extends JFrame {
+public class Admin extends JFrame {
 
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
@@ -106,7 +106,7 @@ public class Login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login frame = new Login();
+					Admin frame = new Admin();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -118,7 +118,7 @@ public class Login extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Login() {
+	public Admin() {
 		setUndecorated(true);
 		setTitle("Qu\u1EA3n L\u00FD Nh\u00E2n Vi\u00EAn B\u1EC7nh Vi\u1EC7n");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
