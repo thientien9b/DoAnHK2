@@ -98,7 +98,6 @@ public class Login extends JFrame {
 	private JLabel lblNewLabel_24;
 	private JTextField textField_15;
 	private JButton btnNewButton_11;
-	private JButton btnNewButton_12;
 
 	/**
 	 * Launch the application.
@@ -208,8 +207,6 @@ public class Login extends JFrame {
 		btnNewButton_2 = new JButton("New button");
 		
 		btnNewButton_3 = new JButton("New button");
-		
-		btnNewButton_12 = new JButton("New button");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
