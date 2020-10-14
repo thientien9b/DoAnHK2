@@ -12,7 +12,11 @@
 			<artifactId>mssql-jdbc</artifactId>
 			<version>8.4.0.jre14</version>
 		</dependency>
-
+	<dependency>
+	    <groupId>org.mindrot</groupId>
+	    <artifactId>jbcrypt</artifactId>
+	    <version>0.4</version>
+	</dependency>
 		<dependency>
 			<groupId>com.toedter</groupId>
 			<artifactId>jcalendar</artifactId>
