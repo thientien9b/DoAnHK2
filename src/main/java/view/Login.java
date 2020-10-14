@@ -1,12 +1,13 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -18,19 +19,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 import dao.Account_dao;
 import entity.Account;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
 
@@ -96,7 +91,7 @@ public class Login extends JFrame {
 		Button btnSubmit = new Button("Login to your account");
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				btnSubmitActionPerformed(e);
+				btnSubmitActionPerformed(e);
 			}
 		});
 		btnSubmit.addMouseListener(new MouseAdapter() {	
@@ -175,7 +170,7 @@ public class Login extends JFrame {
 	        super.paintComponent(g);
 	    }
 	};
-		panel.setBounds(35, 30, 324, 324);
+		panel.setBounds(62, 32, 282, 317);
 		contentPane.add(panel);
 		
 		jlbMsg = new JLabel("");
@@ -185,35 +180,47 @@ public class Login extends JFrame {
 		
 	}
 
-//	protected void btnSubmitActionPerformed(ActionEvent e) {
-//		String password = jtfPin.getText();
-//		String user = jtfUserName.getText();
-//		if(user.length() == 0 || password.length() == 0) {
-//			jlbMsg.setText("Please enter your complete information");	
-//		}else{
-//			if(Account_dao.getListClient(user)) {
-//				boolean match = BCrypt.checkpw(password, Account_dao.getListPin(user));
-//				if (match) {
-//					if(Account_dao.getListAdmin(user)) {
-//						Account acc = new Account();
-//						acc.setID_Acc(Account_dao.getListID(user));
-//						Admin ad = new Admin();
+	protected void btnSubmitActionPerformed(ActionEvent e) {
+		String password = jtfPin.getText();
+		String user = jtfUserName.getText();
+		if(user.length() == 0 || password.length() == 0) {
+			jlbMsg.setText("Please enter your complete information");	
+		}else{
+			if(Account_dao.getListClient(user)) {
+				boolean match = BCrypt.checkpw(password, Account_dao.getListPass(user));
+				if (match) {
+					if(Account_dao.getListAdmin(user) == "Admin") {
+						Account acc = new Account();
+//						acc.setId(Account_dao.getListID(user));
+						Admin ad = new Admin();
 //						ad.lblID.setText(Integer.toString(acc.getID_Acc()));
-//						ad.setVisible(true);
-//						setVisible(false);
-//					}else {	
-//						Account acc = new Account();
+						ad.setVisible(true);
+						setVisible(false);
+					}else if(Account_dao.getListAdmin(user) == "Manager") {	
+						Account acc = new Account();
 //						acc.setID_Acc(Account_dao.getListID(user));
 //						Client client = new Client(acc, this);
 //						client.setVisible(true);
-//						setVisible(false);
-//					}
-//				} else {
-//					jlbMsg.setText("Pin code incorrect");
-//				}
-//			}else {
-//				jlbMsg.setText("User incorrect");
-//			}
-//		}
-//	}
+						setVisible(false);
+					}else if(Account_dao.getListAdmin(user) == "Reception") {	
+						Account acc = new Account();
+//						acc.setID_Acc(Account_dao.getListID(user));
+//						Client client = new Client(acc, this);
+//						client.setVisible(true);
+						setVisible(false);
+					}else {	
+						Account acc = new Account();
+//						acc.setID_Acc(Account_dao.getListID(user));
+//						Client client = new Client(acc, this);
+//						client.setVisible(true);
+						setVisible(false);
+					}
+				} else {
+					jlbMsg.setText("Password code incorrect");
+				}
+			}else {
+				jlbMsg.setText("User incorrect");
+			}
+		}
+	}
 }
