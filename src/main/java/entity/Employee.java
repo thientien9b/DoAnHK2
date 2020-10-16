@@ -1,13 +1,13 @@
 package entity;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Employee {
 
-	
 	private int ID_em;
 	private String Fullname;
-	private Date Date_em;
+	private LocalDate Date_em;
 	private Boolean Gender_em;
 	private String Address_em;
 	private int Phone_em;
@@ -16,9 +16,10 @@ public class Employee {
 	private int ID_position;
 	private int ID_wage;
 	
-	public Employee(int iD_em, String fullname, Date date_em, Boolean gender_em, String address_em, int phone_em,
+	public Employee() {
+	}
+	public Employee(int iD_em, String fullname, LocalDate date_em, Boolean gender_em, String address_em, int phone_em,
 			String email_em, int iD_majors, int iD_position, int iD_wage) {
-		super();
 		ID_em = iD_em;
 		Fullname = fullname;
 		Date_em = date_em;
@@ -43,22 +44,15 @@ public class Employee {
 		return Fullname;
 	}
 
-	@Override
-	public String toString() {
-		return "Employee [ID_em=" + ID_em + ", Fullname=" + Fullname + ", Date_em=" + Date_em + ", Gender_em="
-				+ Gender_em + ", Address_em=" + Address_em + ", Phone_em=" + Phone_em + ", Email_em=" + Email_em
-				+ ", ID_majors=" + ID_majors + ", ID_position=" + ID_position + ", ID_wage=" + ID_wage + "]";
-	}
-
 	public void setFullname(String fullname) {
 		Fullname = fullname;
 	}
 
-	public Date getDate_em() {
+	public LocalDate getDate_em() {
 		return Date_em;
 	}
 
-	public void setDate_em(Date date_em) {
+	public void setDate_em(LocalDate date_em) {
 		Date_em = date_em;
 	}
 
@@ -118,9 +112,12 @@ public class Employee {
 		ID_wage = iD_wage;
 	}
 
-	public Employee() {
-		super();
-		// TODO Auto-generated constructor stub
+	@Override
+	public String toString() {
+		return "Employee [ID_em=" + ID_em + ", Fullname=" + Fullname + ", Date_em=" + Date_em + ", Gender_em="
+				+ Gender_em + ", Address_em=" + Address_em + ", Phone_em=" + Phone_em + ", Email_em=" + Email_em
+				+ ", ID_majors=" + ID_majors + ", ID_position=" + ID_position + ", ID_wage=" + ID_wage + "]";
 	}
+
 }
 

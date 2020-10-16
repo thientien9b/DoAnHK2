@@ -26,6 +26,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import dao.Account_dao;
 import entity.Account;
+import javax.swing.JRadioButton;
 
 public class Login extends JFrame {
 
@@ -68,6 +69,7 @@ public class Login extends JFrame {
 		        setOpaque(false);
 		        super.paintComponent(g);
 		    }
+				
 		};
 		contentPane.addMouseListener(new MouseAdapter() {
 			@Override
@@ -127,6 +129,7 @@ public class Login extends JFrame {
 		jtfPin = new JPasswordField() {
 			
 		};
+		jtfPin.setEchoChar('*');
 		jtfPin.setBounds(417, 183, 256, 36);
 		contentPane.add(jtfPin);
 		
@@ -178,6 +181,21 @@ public class Login extends JFrame {
 		jlbMsg.setBounds(417, 238, 256, 14);
 		contentPane.add(jlbMsg);
 		
+		JRadioButton rdbtnAnHIen = new JRadioButton("");
+		rdbtnAnHIen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(rdbtnAnHIen.isSelected()) {
+				rdbtnNewRadioButtonActionPerformed(e);
+				}else {
+					jtfPin.setEchoChar('*');
+				}
+			}
+		});
+		rdbtnAnHIen.setBounds(500, 165, 13, 14);
+		rdbtnAnHIen.setBorder(null);
+		rdbtnAnHIen.setBackground(new Color(112, 128, 144));
+		contentPane.add(rdbtnAnHIen);
+		
 	}
 
 	protected void btnSubmitActionPerformed(ActionEvent e) {
@@ -222,5 +240,8 @@ public class Login extends JFrame {
 				jlbMsg.setText("User incorrect");
 			}
 		}
+	}
+	protected void rdbtnNewRadioButtonActionPerformed(ActionEvent e) {
+		jtfPin.setEchoChar((char)0);
 	}
 }
