@@ -26,6 +26,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import dao.Account_dao;
 import entity.Account;
+import javax.swing.JRadioButton;
 
 public class Login extends JFrame {
 
@@ -68,6 +69,7 @@ public class Login extends JFrame {
 		        setOpaque(false);
 		        super.paintComponent(g);
 		    }
+				
 		};
 		contentPane.addMouseListener(new MouseAdapter() {
 			@Override
@@ -127,6 +129,7 @@ public class Login extends JFrame {
 		jtfPin = new JPasswordField() {
 			
 		};
+		jtfPin.setEchoChar('*');
 		jtfPin.setBounds(417, 183, 256, 36);
 		contentPane.add(jtfPin);
 		
@@ -157,8 +160,8 @@ public class Login extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("Log in");
 		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lblNewLabel_1.setBounds(417, 54, 79, 36);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		lblNewLabel_1.setBounds(417, 54, 96, 36);
 		contentPane.add(lblNewLabel_1);
 		
 		JPanel panel = new JPanel(){
@@ -177,6 +180,32 @@ public class Login extends JFrame {
 		jlbMsg.setForeground(Color.RED);
 		jlbMsg.setBounds(417, 238, 256, 14);
 		contentPane.add(jlbMsg);
+		
+		JRadioButton rdbtnAnHIen = new JRadioButton("show");
+		rdbtnAnHIen.setForeground(new Color(255, 255, 255));
+		rdbtnAnHIen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(rdbtnAnHIen.isSelected()) {
+				rdbtnNewRadioButtonActionPerformed(e);
+				}else {
+					jtfPin.setEchoChar('*');
+				}
+			}
+		});
+		rdbtnAnHIen.addMouseListener(new MouseAdapter() {	
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				rdbtnAnHIen.setForeground(Color.RED);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				rdbtnAnHIen.setForeground(Color.WHITE);
+			}
+		});
+		rdbtnAnHIen.setBounds(620, 165, 53, 14);
+		rdbtnAnHIen.setBorder(null);
+		rdbtnAnHIen.setBackground(new Color(112, 128, 144));
+		contentPane.add(rdbtnAnHIen);
 		
 	}
 
@@ -222,5 +251,8 @@ public class Login extends JFrame {
 				jlbMsg.setText("User incorrect");
 			}
 		}
+	}
+	protected void rdbtnNewRadioButtonActionPerformed(ActionEvent e) {
+		jtfPin.setEchoChar((char)0);
 	}
 }
