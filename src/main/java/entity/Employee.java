@@ -14,12 +14,12 @@ public class Employee {
 	private String Email_em;
 	private int ID_majors;
 	private int ID_position;
-	private int ID_wage;
+	private int ID_salary;
 	
 	public Employee() {
 	}
 	public Employee(int iD_em, String fullname, LocalDate date_em, Boolean gender_em, String address_em, int phone_em,
-			String email_em, int iD_majors, int iD_position, int iD_wage) {
+			String email_em, int iD_majors, int iD_position, int iD_salary) {
 		ID_em = iD_em;
 		Fullname = fullname;
 		Date_em = date_em;
@@ -29,7 +29,7 @@ public class Employee {
 		Email_em = email_em;
 		ID_majors = iD_majors;
 		ID_position = iD_position;
-		ID_wage = iD_wage;
+		ID_salary = iD_salary;
 	}
 
 	public int getID_em() {
@@ -104,19 +104,19 @@ public class Employee {
 		ID_position = iD_position;
 	}
 
-	public int getID_wage() {
-		return ID_wage;
+	public int getID_salary() {
+		return ID_salary;
 	}
 
-	public void setID_wage(int iD_wage) {
-		ID_wage = iD_wage;
+	public void setID_salary(int iD_salary) {
+		ID_salary = iD_salary;
 	}
 
 	@Override
 	public String toString() {
 		return "Employee [ID_em=" + ID_em + ", Fullname=" + Fullname + ", Date_em=" + Date_em + ", Gender_em="
 				+ Gender_em + ", Address_em=" + Address_em + ", Phone_em=" + Phone_em + ", Email_em=" + Email_em
-				+ ", ID_majors=" + ID_majors + ", ID_position=" + ID_position + ", ID_wage=" + ID_wage + "]";
+				+ ", ID_majors=" + ID_majors + ", ID_position=" + ID_position + ", ID_wage=" + ID_salary + "]";
 	}
 
 }
