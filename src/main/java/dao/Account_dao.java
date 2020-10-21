@@ -11,34 +11,31 @@ import java.util.List;
 import common.ConnectDB;
 import common.ConnectDBProperties;
 import entity.Account;
+import entity.Position;
 
 
 
 public  class Account_dao {
 	
-	public static String getListAdmin(String user) {
-		String a = null;
-		try {
-			var connect = DriverManager.getConnection(ConnectDBProperties.getConnectionUrlFromClassPath());
-			var cs = connect.prepareStatement("select Position.Name_position from Employee join Account on Employee.ID_em = Account.ID_em join Position on Employee.ID_position = Position.ID_position where Account.ID_em like ?");
-			cs.setString(1, user);
+//------------------
+	public static Position getListID_em(String user) {
+		Position acc = new Position();
+		try(
+				var connect = DriverManager.getConnection(ConnectDBProperties.getConnectionUrlFromClassPath());
+				var cs = connect.prepareStatement("select Position.Name_position, Position.Ranks_position from Employee join Account on Employee.ID_em = Account.ID_em join Position on Employee.ID_position = Position.ID_position where Account.ID_em like ?");
+			)		
+		{
+			cs.setString(1,user);
 			var rs = cs.executeQuery();
-			if (rs.next()) {
-				if(rs.getString("Name_position")== "Admin") {
-					a = "admin";
-				}else if(rs.getString("Name_position")== "Manager"){
-					a = "Manager";
-				}else if(rs.getString("Name_position")== "Reception"){
-					a = "Reception";
-				}else {
-					a = "em";
-				}
-			}
+				while(rs.next()) {
+				acc.setName_position(rs.getString("Name_position"));
+				acc.setRanks_position(rs.getString("Ranks_position"));			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}		
-		return a;
-	}
+		}
+		return acc;
+	}	
+	
 //------------------
 	public static String getListPass(String user) {
 		String pass = null;
@@ -61,7 +58,7 @@ public  class Account_dao {
 		boolean client = false;
 		try {
 			var connect = DriverManager.getConnection(ConnectDBProperties.getConnectionUrlFromClassPath());
-			var cs = connect.prepareStatement("SELECT ID_em FROM account WHERE Account.ID_em like ?");
+			var cs = connect.prepareStatement("SELECT ID_em FROM Account WHERE Account.ID_em like ?");
 			
 			cs.setString(1, user);
 			var rs = cs.executeQuery();

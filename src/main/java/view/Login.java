@@ -26,6 +26,9 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import dao.Account_dao;
 import entity.Account;
+import entity.Position;
+
+import javax.swing.JRadioButton;
 
 public class Login extends JFrame {
 
@@ -68,6 +71,7 @@ public class Login extends JFrame {
 		        setOpaque(false);
 		        super.paintComponent(g);
 		    }
+				
 		};
 		contentPane.addMouseListener(new MouseAdapter() {
 			@Override
@@ -127,6 +131,7 @@ public class Login extends JFrame {
 		jtfPin = new JPasswordField() {
 			
 		};
+		jtfPin.setEchoChar('*');
 		jtfPin.setBounds(417, 183, 256, 36);
 		contentPane.add(jtfPin);
 		
@@ -157,8 +162,8 @@ public class Login extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("Log in");
 		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lblNewLabel_1.setBounds(417, 54, 79, 36);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 28));
+		lblNewLabel_1.setBounds(417, 54, 96, 36);
 		contentPane.add(lblNewLabel_1);
 		
 		JPanel panel = new JPanel(){
@@ -178,6 +183,32 @@ public class Login extends JFrame {
 		jlbMsg.setBounds(417, 238, 256, 14);
 		contentPane.add(jlbMsg);
 		
+		JRadioButton rdbtnAnHIen = new JRadioButton("show");
+		rdbtnAnHIen.setForeground(new Color(255, 255, 255));
+		rdbtnAnHIen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(rdbtnAnHIen.isSelected()) {
+				rdbtnNewRadioButtonActionPerformed(e);
+				}else {
+					jtfPin.setEchoChar('*');
+				}
+			}
+		});
+		rdbtnAnHIen.addMouseListener(new MouseAdapter() {	
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				rdbtnAnHIen.setForeground(Color.RED);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				rdbtnAnHIen.setForeground(Color.WHITE);
+			}
+		});
+		rdbtnAnHIen.setBounds(620, 165, 53, 14);
+		rdbtnAnHIen.setBorder(null);
+		rdbtnAnHIen.setBackground(new Color(112, 128, 144));
+		contentPane.add(rdbtnAnHIen);
+		
 	}
 
 	protected void btnSubmitActionPerformed(ActionEvent e) {
@@ -189,38 +220,37 @@ public class Login extends JFrame {
 			if(Account_dao.getListClient(user)) {
 				boolean match = BCrypt.checkpw(password, Account_dao.getListPass(user));
 				if (match) {
-					if(Account_dao.getListAdmin(user) == "Admin") {
-						Account acc = new Account();
-//						acc.setId(Account_dao.getListID(user));
-						Admin ad = new Admin();
-//						ad.lblID.setText(Integer.toString(acc.getID_Acc()));
-						ad.setVisible(true);
+					Account_dao dao = new Account_dao();
+					Position acc = new Position();
+					acc.setName_position(dao.getListID_em(user).getName_position());
+					acc.setRanks_position(dao.getListID_em(user).getRanks_position());
+					if(acc.getName_position().equals("Manager")) {
+						Manager ma = new Manager();
+						ma.setVisible(true);
 						setVisible(false);
-					}else if(Account_dao.getListAdmin(user) == "Manager") {	
-						Account acc = new Account();
-//						acc.setID_Acc(Account_dao.getListID(user));
-//						Client client = new Client(acc, this);
-//						client.setVisible(true);
+						if(acc.getName_position().equals("Manager") && acc.getRanks_position().equals("Chief")) {
+							Admin ad = new Admin();
+							ad.setVisible(true);
+							setVisible(false);
+						}
+					}else if(acc.getName_position().equals("Reception")) {
+						Reception re = new Reception();
+						re.setVisible(true);
 						setVisible(false);
-					}else if(Account_dao.getListAdmin(user) == "Reception") {	
-						Account acc = new Account();
-//						acc.setID_Acc(Account_dao.getListID(user));
-//						Client client = new Client(acc, this);
-//						client.setVisible(true);
-						setVisible(false);
-					}else {	
-						Account acc = new Account();
-//						acc.setID_Acc(Account_dao.getListID(user));
-//						Client client = new Client(acc, this);
-//						client.setVisible(true);
+					}else {
+						Clientjava cl = new Clientjava();
+						cl.setVisible(true);
 						setVisible(false);
 					}
 				} else {
 					jlbMsg.setText("Password code incorrect");
 				}
 			}else {
-				jlbMsg.setText("User incorrect");
+				jlbMsg.setText("User does not exist");
 			}
 		}
+	}
+	protected void rdbtnNewRadioButtonActionPerformed(ActionEvent e) {
+		jtfPin.setEchoChar((char)0);
 	}
 }
