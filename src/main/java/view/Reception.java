@@ -14,14 +14,18 @@ import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import java.awt.Color;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.border.BevelBorder;
 
 public class Reception extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private JLabel lblTtC;
 	private JTextField textField;
-	private JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -47,50 +51,122 @@ public class Reception extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1115, 785);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.PINK);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(new Color(0, 139, 139));
+		contentPane.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(30, 144, 255), new Color(30, 144, 255), new Color(30, 144, 255), new Color(30, 144, 255)));
 		setContentPane(contentPane);
 		
-		table = new JTable();
+		JScrollPane scrollPane = new JScrollPane();
 		
-		lblTtC = new JLabel("<html>&#128338;  T\u1EA4T C\u1EA2 CA TR\u1EF0C C\u1EE6A NH\u00C2N VI\u00CAN</html>");
-		lblTtC.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		JLabel lblFind = new JLabel("Find all staff in the hospital");
+		lblFind.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
+		lblFind.setForeground(new Color(0, 206, 209));
+		
+		JLabel lblDepart = new JLabel("Department");
+		lblDepart.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"All", "Dean", "Vice-dean"}));
+		
+		JLabel lblName = new JLabel("Name");
+		lblName.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		
 		textField = new JTextField();
 		textField.setColumns(10);
 		
-		lblNewLabel = new JLabel("<html>&#128269;</html>");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		JLabel lblFaCul = new JLabel("Faculty");
+		lblFaCul.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"All", "Cardiolory", "Dermatology", "Endocrinology", "General Medicine", "Surgery", "Obstetric"}));
+		
+		JLabel lblPosi = new JLabel("Position");
+		lblPosi.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		
+		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"All", "Doctor", "Nurse", "Assistant", "Security", "Reception", "Manager"}));
+		
+		JPanel panel = new JPanel();
+		
+		JButton btnSearch = new JButton("Search");
+		btnSearch.setForeground(new Color(255, 215, 0));
+		btnSearch.setFont(new Font("Krungthep", Font.PLAIN, 20));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(table, GroupLayout.DEFAULT_SIZE, 1069, Short.MAX_VALUE)
-							.addContainerGap())
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 1099, Short.MAX_VALUE)
 						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addComponent(lblTtC, GroupLayout.PREFERRED_SIZE, 623, GroupLayout.PREFERRED_SIZE)
-							.addGap(113))
+							.addComponent(lblFind, GroupLayout.PREFERRED_SIZE, 441, GroupLayout.PREFERRED_SIZE)
+							.addGap(324))))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(81)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblDepart)
+						.addComponent(lblName))
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(textField)
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
+					.addGap(198)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblFaCul)
+							.addGap(26)
+							.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
+							.addGap(70)
+							.addComponent(btnSearch, GroupLayout.PREFERRED_SIZE, 166, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblPosi)
 							.addGap(18)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(889, Short.MAX_VALUE))))
+							.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)))
+					.addGap(110))
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addContainerGap(978, Short.MAX_VALUE)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+					.addGap(18))
 		);
 		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-					.addComponent(lblTtC, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(21)
+							.addComponent(lblFind)
+							.addGap(25)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblDepart)
+								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblFaCul)
+								.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(49)
+									.addComponent(lblName))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(41)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+										.addComponent(textField, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblPosi)
+										.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(98)
+							.addComponent(btnSearch, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)))
+					.addGap(27)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 499, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 668, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(13, Short.MAX_VALUE))
 		);
+		
+		JLabel lblBack = new JLabel("Back");
+		lblBack.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		lblBack.setForeground(new Color(0, 191, 255));
+		panel.add(lblBack);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
 	}
 }
