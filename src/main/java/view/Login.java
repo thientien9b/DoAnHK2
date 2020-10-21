@@ -26,6 +26,8 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import dao.Account_dao;
 import entity.Account;
+import entity.Position;
+
 import javax.swing.JRadioButton;
 
 public class Login extends JFrame {
@@ -218,37 +220,33 @@ public class Login extends JFrame {
 			if(Account_dao.getListClient(user)) {
 				boolean match = BCrypt.checkpw(password, Account_dao.getListPass(user));
 				if (match) {
-					if(Account_dao.getListAdmin(user) == "Admin") {
-						Account acc = new Account();
-//						acc.setId(Account_dao.getListID(user));
-						Admin ad = new Admin();
-//						ad.lblID.setText(Integer.toString(acc.getID_Acc()));
-						ad.setVisible(true);
+					Account_dao dao = new Account_dao();
+					Position acc = new Position();
+					acc.setName_position(dao.getListID_em(user).getName_position());
+					acc.setRanks_position(dao.getListID_em(user).getRanks_position());
+					if(acc.getName_position().equals("Manager")) {
+						Manager ma = new Manager();
+						ma.setVisible(true);
 						setVisible(false);
-					}else if(Account_dao.getListAdmin(user) == "Manager") {	
-						Account acc = new Account();
-//						acc.setID_Acc(Account_dao.getListID(user));
-//						Client client = new Client(acc, this);
-//						client.setVisible(true);
+						if(acc.getName_position().equals("Manager") && acc.getRanks_position().equals("Chief")) {
+							Admin ad = new Admin();
+							ad.setVisible(true);
+							setVisible(false);
+						}
+					}else if(acc.getName_position().equals("Reception")) {
+						Reception re = new Reception();
+						re.setVisible(true);
 						setVisible(false);
-					}else if(Account_dao.getListAdmin(user) == "Reception") {	
-						Account acc = new Account();
-//						acc.setID_Acc(Account_dao.getListID(user));
-//						Client client = new Client(acc, this);
-//						client.setVisible(true);
-						setVisible(false);
-					}else {	
-						Account acc = new Account();
-//						acc.setID_Acc(Account_dao.getListID(user));
-//						Client client = new Client(acc, this);
-//						client.setVisible(true);
+					}else {
+						Clientjava cl = new Clientjava();
+						cl.setVisible(true);
 						setVisible(false);
 					}
 				} else {
 					jlbMsg.setText("Password code incorrect");
 				}
 			}else {
-				jlbMsg.setText("User incorrect");
+				jlbMsg.setText("User does not exist");
 			}
 		}
 	}
