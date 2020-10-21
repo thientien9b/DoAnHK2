@@ -7,11 +7,11 @@ public class ConnectDB {
 	
 	private static Connection connect = null;
 	private static String url = "jdbc:sqlserver://";
-	private static String serverName = "LAPTOP-3BD70UTV";
+	private static String serverName = "localhost";
 	private static String portNumber = "1433";
-	private static String databaseName = "QuanLyATM";
+	private static String databaseName = "DoanHK";
 	private static String username = "sa";
-	private static String password = "123456";
+	private static String password = "04042402linh";
 
 	public static String getConnectionUrl() {
 		return url + serverName + ":" + portNumber + "; databaseName=" + databaseName + "; user=" + username
