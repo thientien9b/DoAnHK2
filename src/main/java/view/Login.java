@@ -225,13 +225,18 @@ public class Login extends JFrame {
 					acc.setName_position(dao.getListID_em(user).getName_position());
 					acc.setRanks_position(dao.getListID_em(user).getRanks_position());
 					if(acc.getName_position().equals("Manager")) {
-						Manager ma = new Manager();
-						ma.setVisible(true);
-						setVisible(false);
-						if(acc.getName_position().equals("Manager") && acc.getRanks_position().equals("Chief")) {
-							Admin ad = new Admin();
+						if(acc.getRanks_position()==null) {
+							Manager ma = new Manager();
+							ma.setVisible(true);
+							setVisible(false);
+							System.out.println(acc.getRanks_position());
+						}else if(acc.getRanks_position().equals("Chief")){
+							Account acc1 = new Account();
+							acc1.setID_em(Account_dao.getListID(user));
+							Admin ad = new Admin(acc1,this);
 							ad.setVisible(true);
 							setVisible(false);
+							System.out.println(acc.getRanks_position());
 						}
 					}else if(acc.getName_position().equals("Reception")) {
 						Reception re = new Reception();
