@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 public class Employee {
 
-	private int ID_em;
+	private String ID_em;
 	private String Fullname;
 	private LocalDate Date_em;
 	private Boolean Gender_em;
@@ -18,7 +18,7 @@ public class Employee {
 	
 	public Employee() {
 	}
-	public Employee(int iD_em, String fullname, LocalDate date_em, Boolean gender_em, String address_em, int phone_em,
+	public Employee(String iD_em, String fullname, LocalDate date_em, Boolean gender_em, String address_em, int phone_em,
 			String email_em, int iD_majors, int iD_position, int iD_salary) {
 		ID_em = iD_em;
 		Fullname = fullname;
@@ -32,11 +32,11 @@ public class Employee {
 		ID_salary = iD_salary;
 	}
 
-	public int getID_em() {
+	public String getID_em() {
 		return ID_em;
 	}
 
-	public void setID_em(int iD_em) {
+	public void setID_em(String iD_em) {
 		ID_em = iD_em;
 	}
 

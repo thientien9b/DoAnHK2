@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTabbedPane;
@@ -15,12 +16,21 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
+
+import dao.Account_dao;
+import entity.Account;
+
 import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Admin extends JFrame {
 
@@ -30,7 +40,6 @@ public class Admin extends JFrame {
 	private JPanel panel_1;
 	private JPanel panel_2;
 	private JPanel panel_3;
-	private JTable table;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
@@ -52,7 +61,7 @@ public class Admin extends JFrame {
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
-	private JTable table_1;
+	private static JTable table_1;
 	private JLabel lblThngTin;
 	private JSeparator separator;
 	private JLabel lblQunL;
@@ -122,26 +131,43 @@ public class Admin extends JFrame {
 	private JButton btnNewButton_15;
 	private JLabel lblChmCng;
 
+	private Account account;
+	private Login lg;
+	private JScrollPane scrollPane;
+	private static JTable table;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Admin frame = new Admin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Admin frame = new Admin();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
+	
+	public Admin() {
+		initComponents();
 	}
 
+	public Admin(Account acc, Login login) {
+		account = acc;
+		lg = login;
+		initComponents();
+		Account_dao dao = new Account_dao();
+		LoadAccount(dao);
+	}
 	/**
 	 * Create the frame.
+	 * @return 
 	 */
-	public Admin() {
+	public void initComponents() {
 		setUndecorated(true);
 		setTitle("Qu\u1EA3n L\u00FD Nh\u00E2n Vi\u00EAn B\u1EC7nh Vi\u1EC7n");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -170,8 +196,6 @@ public class Admin extends JFrame {
 		panel = new JPanel();
 		panel.setBackground(Color.PINK);
 		tabbedPane.addTab("Nh\u00E2n Vi\u00EAn", null, panel, null);
-		
-		table = new JTable();
 		
 		lblNewLabel = new JLabel("<html>&#127973; C\u1EACP NH\u1EACP TH\u00D4NG TIN CHI TI\u1EBET NH\u00C2N VI\u00CAN </html>");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 26));
@@ -224,19 +248,22 @@ public class Admin extends JFrame {
 		textField_7.setColumns(10);
 		
 		btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnNewButtonActionPerformed(e);
+			}
+		});
 		
 		btnNewButton_1 = new JButton("New button");
 		
 		btnNewButton_2 = new JButton("New button");
 		
 		btnNewButton_3 = new JButton("New button");
+		
+		scrollPane = new JScrollPane();
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(18)
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 1062, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(14, Short.MAX_VALUE))
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap(279, Short.MAX_VALUE)
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 623, GroupLayout.PREFERRED_SIZE)
@@ -303,89 +330,105 @@ public class Admin extends JFrame {
 					.addGap(138)
 					.addComponent(btnNewButton_3)
 					.addContainerGap(214, Short.MAX_VALUE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 1064, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(20, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(15)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-							.addGroup(gl_panel.createSequentialGroup()
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-									.addGroup(gl_panel.createSequentialGroup()
-										.addGap(11)
-										.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-											.addComponent(lblNewLabel_1)
-											.addComponent(lblNewLabel_8)
-											.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-											.addGroup(gl_panel.createSequentialGroup()
-												.addGap(18)
-												.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-													.addComponent(lblNewLabel_2)
-													.addComponent(lblNewLabel_9)))
-											.addGroup(gl_panel.createSequentialGroup()
-												.addPreferredGap(ComponentPlacement.UNRELATED)
-												.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-										.addGap(12)
-										.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-											.addComponent(lblNewLabel_3)
-											.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-										.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-											.addGroup(gl_panel.createSequentialGroup()
-												.addComponent(lblNewLabel_4)
-												.addGap(27))
-											.addGroup(gl_panel.createSequentialGroup()
-												.addComponent(rdbtnNewRadioButton_1)
-												.addGap(17))
-											.addGroup(gl_panel.createSequentialGroup()
-												.addComponent(rdbtnNewRadioButton)
-												.addGap(17)))
-										.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-											.addComponent(lblNewLabel_5)
-											.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-											.addGroup(gl_panel.createSequentialGroup()
-												.addGap(18)
-												.addComponent(lblNewLabel_6))
-											.addGroup(gl_panel.createSequentialGroup()
-												.addPreferredGap(ComponentPlacement.UNRELATED)
-												.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-											.addGroup(gl_panel.createSequentialGroup()
-												.addGap(3)
-												.addComponent(lblNewLabel_13))))
-									.addGroup(gl_panel.createSequentialGroup()
-										.addGap(9)
-										.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addGap(16)
-										.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addGap(14)
-										.addComponent(textField_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-								.addPreferredGap(ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-									.addComponent(btnNewButton, Alignment.TRAILING)
-									.addComponent(btnNewButton_2, Alignment.TRAILING))
-								.addGap(10))
-							.addGroup(gl_panel.createSequentialGroup()
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(btnNewButton_1)
-								.addGap(11)))
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton_3)
-							.addGap(11)))
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 407, GroupLayout.PREFERRED_SIZE)
-					.addGap(13))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(141)
-					.addComponent(lblNewLabel_10)
-					.addContainerGap(576, Short.MAX_VALUE))
+							.addGap(15)
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+									.addGroup(gl_panel.createSequentialGroup()
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+											.addGroup(gl_panel.createSequentialGroup()
+												.addGap(11)
+												.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+													.addComponent(lblNewLabel_1)
+													.addComponent(lblNewLabel_8)
+													.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+												.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+													.addGroup(gl_panel.createSequentialGroup()
+														.addGap(18)
+														.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+															.addComponent(lblNewLabel_2)
+															.addComponent(lblNewLabel_9)))
+													.addGroup(gl_panel.createSequentialGroup()
+														.addPreferredGap(ComponentPlacement.UNRELATED)
+														.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+												.addGap(12)
+												.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+													.addComponent(lblNewLabel_3)
+													.addComponent(dateChooser, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+												.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+												.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+													.addGroup(gl_panel.createSequentialGroup()
+														.addComponent(lblNewLabel_4)
+														.addGap(27))
+													.addGroup(gl_panel.createSequentialGroup()
+														.addComponent(rdbtnNewRadioButton_1)
+														.addGap(17))
+													.addGroup(gl_panel.createSequentialGroup()
+														.addComponent(rdbtnNewRadioButton)
+														.addGap(17)))
+												.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+													.addComponent(lblNewLabel_5)
+													.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+												.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+													.addGroup(gl_panel.createSequentialGroup()
+														.addGap(18)
+														.addComponent(lblNewLabel_6))
+													.addGroup(gl_panel.createSequentialGroup()
+														.addPreferredGap(ComponentPlacement.UNRELATED)
+														.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+													.addGroup(gl_panel.createSequentialGroup()
+														.addGap(3)
+														.addComponent(lblNewLabel_13))))
+											.addGroup(gl_panel.createSequentialGroup()
+												.addGap(9)
+												.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addGap(16)
+												.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addGap(14)
+												.addComponent(textField_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+										.addPreferredGap(ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+											.addComponent(btnNewButton, Alignment.TRAILING)
+											.addComponent(btnNewButton_2, Alignment.TRAILING))
+										.addGap(10))
+									.addGroup(gl_panel.createSequentialGroup()
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(btnNewButton_1)
+										.addGap(11)))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnNewButton_3)
+									.addGap(11))))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(141)
+							.addComponent(lblNewLabel_10)
+							.addGap(157)))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 400, GroupLayout.PREFERRED_SIZE)
+					.addGap(19))
 		);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
 		panel.setLayout(gl_panel);
 		
 		panel_1 = new JPanel();
+		panel_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				panel_1MouseClicked(e);
+			}
+		});
 		panel_1.setBackground(Color.PINK);
 		tabbedPane.addTab("Qu\u1EA3n L\u00FD", null, panel_1, null);
 		
@@ -472,7 +515,7 @@ public class Admin extends JFrame {
 									.addComponent(btnNewButton_5)
 									.addGap(80)
 									.addComponent(btnNewButton_6)))
-							.addPreferredGap(ComponentPlacement.RELATED)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(table_1, GroupLayout.PREFERRED_SIZE, 459, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGap(8)
@@ -514,11 +557,12 @@ public class Admin extends JFrame {
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(14)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(14)
 							.addComponent(lblThngTin, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+							.addPreferredGap(ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_panel_1.createSequentialGroup()
 									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_panel_1.createSequentialGroup()
@@ -538,21 +582,20 @@ public class Admin extends JFrame {
 									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 										.addComponent(btnNewButton_4)
 										.addComponent(btnNewButton_5)))
-								.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+								.addGroup(gl_panel_1.createSequentialGroup()
 									.addComponent(btnNewButton_6)
-									.addGap(24))))
+									.addGap(24)))
+							.addGap(83))
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(13)
-							.addComponent(table_1, GroupLayout.PREFERRED_SIZE, 258, GroupLayout.PREFERRED_SIZE)))
-					.addGap(83)
+							.addComponent(table_1, GroupLayout.PREFERRED_SIZE, 258, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)))
 					.addComponent(separator, GroupLayout.PREFERRED_SIZE, 7, GroupLayout.PREFERRED_SIZE)
 					.addGap(0, 0, Short.MAX_VALUE)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGap(13)
 							.addComponent(lblQunL, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_panel_1.createSequentialGroup()
 									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_panel_1.createSequentialGroup()
@@ -576,15 +619,15 @@ public class Admin extends JFrame {
 											.addGap(25)
 											.addComponent(textField_9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 									.addPreferredGap(ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-										.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+										.addGroup(gl_panel_1.createSequentialGroup()
 											.addComponent(btnNewButton_7)
 											.addGap(20)
 											.addComponent(lblNewLabel_14, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
-										.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+										.addGroup(gl_panel_1.createSequentialGroup()
 											.addComponent(btnNewButton_8)
 											.addGap(41))))
-								.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+								.addGroup(gl_panel_1.createSequentialGroup()
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(btnNewButton_9)
 									.addGap(41))))
@@ -955,4 +998,32 @@ public class Admin extends JFrame {
 		contentPane_1.setLayout(gl_contentPane_1);
 		contentPane.setLayout(gl_contentPane);
 	}
+	protected void panel_1MouseClicked(MouseEvent e) {
+		Account_dao dao = new Account_dao();
+		LoadAccount(dao);
+	}
+	protected void btnNewButtonActionPerformed(ActionEvent e) {
+		Account_dao dao = new Account_dao();
+		LoadAccount(dao);
+	}
+	
+	static void LoadAccount(Account_dao dao) {
+		DefaultTableModel model = new DefaultTableModel();
+		model.addColumn("Id");
+		model.addColumn("Fullname");
+		model.addColumn("Gender");
+		model.addColumn("Phone");
+		model.addColumn("Birthday");
+		model.addColumn("Email");
+		model.addColumn("Address");
+		model.addColumn("Position");
+		model.addColumn("Ranks position");
+		model.addColumn("Majors");
+		model.addColumn("Address majors");
+		dao.getListAcc().forEach(
+				acc -> model.addRow(new Object[] {acc.getID_em(),acc.getFullname(),acc.getGender_em()?"male":"female","0"+acc.getPhone_em(),acc.getDate_em(),acc.getEmail_em(),acc.getAddress_em(),acc.getName_position(),acc.getRanks_position(),acc.getName_majors(),acc.getAddress_majors()})	
+			);
+		table.setModel(model);
+	}
+
 }
