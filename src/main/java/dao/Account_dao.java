@@ -86,9 +86,11 @@ public  class Account_dao {
 			Hospital acc = new Hospital();
 			acc.setID_em(rs.getString("ID_em"));
 			acc.setFullname(rs.getString("Fullname"));
-			acc.setGender_em(rs.getBoolean("Gender_em"));
-			acc.setPhone_em(rs.getInt("Phone_em"));
 			acc.setDate_em(rs.getDate("Date_em").toLocalDate());
+			acc.setGender_em(rs.getBoolean("Gender_em"));
+			acc.setAddress_em(rs.getString("Address_em"));
+			acc.setPhone_em(rs.getInt("Phone_em"));
+			
 			acc.setEmail_em(rs.getString("Email_em"));
 			acc.setAddress_em(rs.getString("Address_em"));
 			acc.setName_position(rs.getString("Name_position"));
@@ -119,4 +121,31 @@ public  class Account_dao {
 		}
 		return ID_em;
 	}	
+	public List<Hospital> getListManager() {
+		var list_Acc = new ArrayList<Hospital>();
+		
+		try(
+				var connect = DriverManager.getConnection(ConnectDBProperties.getConnectionUrlFromClassPath());
+				var cs = connect.prepareStatement("select * from Employee join Majors on Employee.ID_majors = Majors.ID_majors join Position on Employee.ID_position = Position.ID_position");
+				ResultSet rs = cs.executeQuery();
+		)		
+		{
+			while(rs.next()) {
+			Hospital acc = new Hospital();
+			acc.setID_em(rs.getString("ID_em"));
+			acc.setFullname(rs.getString("Fullname"));
+			acc.setDate_em(rs.getDate("Date_em").toLocalDate());
+			acc.setGender_em(rs.getBoolean("Gender_em"));
+			acc.setAddress_em(rs.getString("Address_em"));
+			acc.setPhone_em(rs.getInt("Phone_em"));
+			acc.setName_majors(rs.getNString("Name_majors"));
+			
+			list_Acc.add(acc);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list_Acc;
+	}
 }
+
