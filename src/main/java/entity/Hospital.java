@@ -10,9 +10,9 @@ public class Hospital {
 	private String Address_em;
 	private int Phone_em;
 	private String Email_em;
-	private int ID_majors;
-	private int ID_position;
-	private int ID_salary;
+	private String ID_majors;
+	private String ID_position;
+	private String ID_salary;
 	private int ID_assignment;
 	private LocalDate time_ass;
 	private Boolean status_ass;
@@ -20,7 +20,7 @@ public class Hospital {
 	private String Name_position;
 	private String Ranks_position;
 	private Double Basic_salary;
-	private Double Coefficcients_salary;
+	private Double Coefficients_salary;
 	private Double Allowance_salary;
 	private int Date_all;
 	private Double Salary_all;
@@ -28,10 +28,11 @@ public class Hospital {
 	private String Address_majors;
 	
 	
+	
 	public Hospital(String iD_em, String fullname, LocalDate date_em, Boolean gender_em, String address_em,
-			int phone_em, String email_em, int iD_majors, int iD_position, int iD_salary, int iD_assignment,
+			int phone_em, String email_em, String iD_majors, String iD_position, String iD_salary, int iD_assignment,
 			LocalDate time_ass, Boolean status_ass, String password_acc, String name_position, String ranks_position,
-			Double basic_salary, Double coefficcients_salary, Double allowance_salary, int date_all, Double salary_all,
+			Double basic_salary, Double coefficients_salary, Double allowance_salary, int date_all, Double salary_all,
 			String name_majors, String address_majors) {
 		ID_em = iD_em;
 		Fullname = fullname;
@@ -50,13 +51,15 @@ public class Hospital {
 		Name_position = name_position;
 		Ranks_position = ranks_position;
 		Basic_salary = basic_salary;
-		Coefficcients_salary = coefficcients_salary;
+		Coefficients_salary = coefficients_salary;
 		Allowance_salary = allowance_salary;
 		Date_all = date_all;
 		Salary_all = salary_all;
 		Name_majors = name_majors;
 		Address_majors = address_majors;
 	}
+
+
 	public Hospital() {
 	}
 	
@@ -115,22 +118,22 @@ public class Hospital {
 	public void setEmail_em(String email_em) {
 		Email_em = email_em;
 	}
-	public int getID_majors() {
+	public String getID_majors() {
 		return ID_majors;
 	}
-	public void setID_majors(int iD_majors) {
+	public void setID_majors(String iD_majors) {
 		ID_majors = iD_majors;
 	}
-	public int getID_position() {
+	public String getID_position() {
 		return ID_position;
 	}
-	public void setID_position(int iD_position) {
+	public void setID_position(String iD_position) {
 		ID_position = iD_position;
 	}
-	public int getID_salary() {
+	public String getID_salary() {
 		return ID_salary;
 	}
-	public void setID_salary(int iD_salary) {
+	public void setID_salary(String iD_salary) {
 		ID_salary = iD_salary;
 	}
 	public int getID_assignment() {
@@ -175,11 +178,11 @@ public class Hospital {
 	public void setBasic_salary(Double basic_salary) {
 		Basic_salary = basic_salary;
 	}
-	public Double getCoefficcients_salary() {
-		return Coefficcients_salary;
+	public Double getCoefficients_salary() {
+		return Coefficients_salary;
 	}
-	public void setCoefficcients_salary(Double coefficcients_salary) {
-		Coefficcients_salary = coefficcients_salary;
+	public void setCoefficients_salary(Double coefficients_salary) {
+		Coefficients_salary = coefficients_salary;
 	}
 	public Double getAllowance_salary() {
 		return Allowance_salary;
@@ -206,7 +209,7 @@ public class Hospital {
 				+ ", ID_majors=" + ID_majors + ", ID_position=" + ID_position + ", ID_salary=" + ID_salary
 				+ ", ID_assignment=" + ID_assignment + ", time_ass=" + time_ass + ", status_ass=" + status_ass
 				+ ", password_acc=" + password_acc + ", Name_position=" + Name_position + ", Ranks_position="
-				+ Ranks_position + ", Basic_salary=" + Basic_salary + ", Coefficcients_salary=" + Coefficcients_salary
+				+ Ranks_position + ", Basic_salary=" + Basic_salary + ", Coefficients_salary=" + Coefficients_salary
 				+ ", Allowance_salary=" + Allowance_salary + ", Date_all=" + Date_all + ", Salary_all=" + Salary_all
 				+ ", Name_majors=" + Name_majors + ", Address_majors=" + Address_majors + "]";
 	}
