@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import dao.Account_dao;
+import entity.Account;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -46,27 +50,34 @@ public class Clientjava extends JFrame {
 	private JTable table;
 	private JPanel panel_3;
 	private JLabel lblLchTrcCa;
-
+	private Account account;
+	private Login lg;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Clientjava frame = new Clientjava();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public Clientjava() {
+		initComponents();
 	}
 
+	public Clientjava(Account acc, Login login) {
+		account = acc;
+		lg = login;
+		initComponents();
+		Account_dao dao = new Account_dao();
+		lblNewLabel_9.setText(dao.getListID_acc(account.getID_em()).getFullname());
+		lblNewLabel_10.setText(dao.getListID_acc(account.getID_em()).getDate_em().toString());
+		lblNewLabel_11.setText(dao.getListID_acc(account.getID_em()).getGender_em()?"male":"female");
+		lblNewLabel_12.setText(dao.getListID_acc(account.getID_em()).getAddress_em());
+		lblNewLabel_13.setText("0"+dao.getListID_acc(account.getID_em()).getPhone_em());
+		lblNewLabel_14.setText(dao.getListID_acc(account.getID_em()).getName_position());
+		lblNewLabel_15.setText(dao.getListID_acc(account.getID_em()).getName_majors());
+		lblNewLabel_16.setText(dao.getListID_acc(account.getID_em()).getEmail_em());
+	}
 	/**
 	 * Create the frame.
+	 * @return 
 	 */
-	public Clientjava() {
+	public void initComponents() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 933, 598);
 		contentPane = new JPanel();

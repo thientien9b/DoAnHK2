@@ -18,6 +18,8 @@ import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Manager extends JFrame {
 
@@ -47,18 +49,18 @@ public class Manager extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Manager frame = new Manager();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Manager frame = new Manager();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -129,7 +131,7 @@ public class Manager extends JFrame {
 		btnNewButton_3 = new JButton("Quit");
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(49)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -138,17 +140,20 @@ public class Manager extends JFrame {
 							.addGap(18)
 							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_contentPane.createSequentialGroup()
 											.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 												.addComponent(lblMCng, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
 												.addComponent(lblMNhnVin, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))
-											.addGap(18)
-											.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-												.addComponent(textField_1)
-												.addComponent(textField, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)))
+											.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addGroup(gl_contentPane.createSequentialGroup()
+													.addGap(18)
+													.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+												.addGroup(gl_contentPane.createSequentialGroup()
+													.addGap(29)
+													.addComponent(textField, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))))
 										.addGroup(gl_contentPane.createSequentialGroup()
 											.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
 												.addComponent(lblSGiLm, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -157,8 +162,8 @@ public class Manager extends JFrame {
 											.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 												.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
 												.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))))
-									.addGap(170))
-								.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+									.addGap(162))
+								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(btnNewButton_1)
 									.addGap(63)))
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -177,13 +182,13 @@ public class Manager extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addComponent(table, GroupLayout.PREFERRED_SIZE, 1086, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(77)
 					.addComponent(btnNewButton)
-					.addPreferredGap(ComponentPlacement.RELATED, 777, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 837, Short.MAX_VALUE)
 					.addComponent(btnNewButton_3)
 					.addGap(69))
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap(379, Short.MAX_VALUE)
 					.addComponent(lblChmCng, GroupLayout.PREFERRED_SIZE, 623, GroupLayout.PREFERRED_SIZE)
 					.addGap(99))
@@ -200,9 +205,9 @@ public class Manager extends JFrame {
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblMCng, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblHSLng, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblMNhnVin, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)

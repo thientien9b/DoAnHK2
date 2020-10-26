@@ -26,6 +26,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import dao.Account_dao;
 import entity.Account;
+import entity.Hospital;
 import entity.Position;
 
 import javax.swing.JRadioButton;
@@ -37,6 +38,7 @@ public class Login extends JFrame {
 	private JPasswordField jtfPin;
 	int xx,xy;
 	private JLabel jlbMsg;
+	private JLabel lblQuenPass;
 
 	/**
 	 * Launch the application.
@@ -46,6 +48,7 @@ public class Login extends JFrame {
 			public void run() {
 				try {
 					Login frame = new Login();
+					frame.setLocationRelativeTo(null);
 					frame.setUndecorated(true);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -188,7 +191,7 @@ public class Login extends JFrame {
 		rdbtnAnHIen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(rdbtnAnHIen.isSelected()) {
-				rdbtnNewRadioButtonActionPerformed(e);
+					jtfPin.setEchoChar((char)0);
 				}else {
 					jtfPin.setEchoChar('*');
 				}
@@ -197,7 +200,7 @@ public class Login extends JFrame {
 		rdbtnAnHIen.addMouseListener(new MouseAdapter() {	
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				rdbtnAnHIen.setForeground(Color.RED);
+				rdbtnAnHIen.setForeground(Color.DARK_GRAY);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -208,6 +211,25 @@ public class Login extends JFrame {
 		rdbtnAnHIen.setBorder(null);
 		rdbtnAnHIen.setBackground(new Color(112, 128, 144));
 		contentPane.add(rdbtnAnHIen);
+		
+		lblQuenPass = new JLabel("Forgot pasword");
+		lblQuenPass.setForeground(Color.WHITE);
+		lblQuenPass.setBounds(584, 318, 89, 14);
+		contentPane.add(lblQuenPass);
+		lblQuenPass.addMouseListener(new MouseAdapter() {	
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				aaaaaa(e);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblQuenPass.setForeground(Color.DARK_GRAY);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblQuenPass.setForeground(Color.WHITE);
+			}
+		});
 		
 	}
 
@@ -227,23 +249,29 @@ public class Login extends JFrame {
 					if(acc.getName_position().equals("Manager")) {
 						if(acc.getRanks_position()==null) {
 							Manager ma = new Manager();
+							ma.setLocationRelativeTo(null);
 							ma.setVisible(true);
 							setVisible(false);
 							System.out.println(acc.getRanks_position());
 						}else if(acc.getRanks_position().equals("Chief")){
 							Account acc1 = new Account();
-							acc1.setID_em(Account_dao.getListID(user));
+							acc1.setID_em(user);
 							Admin ad = new Admin(acc1,this);
+							ad.setLocationRelativeTo(null);
 							ad.setVisible(true);
 							setVisible(false);
 							System.out.println(acc.getRanks_position());
 						}
 					}else if(acc.getName_position().equals("Reception")) {
 						Reception re = new Reception();
+						re.setLocationRelativeTo(null);
 						re.setVisible(true);
 						setVisible(false);
 					}else {
-						Clientjava cl = new Clientjava();
+						Account acc1 = new Account();
+						acc1.setID_em(user);
+						Clientjava cl = new Clientjava(acc1,this);
+						cl.setLocationRelativeTo(null);
 						cl.setVisible(true);
 						setVisible(false);
 					}
@@ -255,7 +283,10 @@ public class Login extends JFrame {
 			}
 		}
 	}
-	protected void rdbtnNewRadioButtonActionPerformed(ActionEvent e) {
-		jtfPin.setEchoChar((char)0);
+	
+	protected void aaaaaa(MouseEvent e) {
+		Email pass = new Email();
+		pass.setLocationRelativeTo(null);
+		pass.setVisible(true);
 	}
 }
