@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,9 +12,12 @@ import java.util.List;
 import common.ConnectDB;
 import common.ConnectDBProperties;
 import entity.Account;
+import entity.Assignment;
 import entity.Employee;
 import entity.Hospital;
+
 import entity.Position;
+import view.Manager;
 
 
 
@@ -97,6 +101,7 @@ public  class Account_dao {
 			acc.setRanks_position(rs.getString("Ranks_position"));
 			acc.setName_majors(rs.getNString("Name_majors"));
 			acc.setAddress_majors(rs.getString("Address_majors"));
+			
 			list_Acc.add(acc);
 			}
 		} catch (Exception e) {
@@ -121,31 +126,52 @@ public  class Account_dao {
 		}
 		return ID_em;
 	}	
-	public List<Hospital> getListManager() {
-		var list_Acc = new ArrayList<Hospital>();
+	public void updateAssignment(Assignment ass) {
+		try (Connection connect = DriverManager.getConnection(ConnectDBProperties.getConnectionUrlFromClassPath());
+				CallableStatement cs = connect.prepareCall("{call UpdateAssignment(?)}");) {
 		
-		try(
-				var connect = DriverManager.getConnection(ConnectDBProperties.getConnectionUrlFromClassPath());
-				var cs = connect.prepareStatement("select * from Employee join Majors on Employee.ID_majors = Majors.ID_majors join Position on Employee.ID_position = Position.ID_position");
-				ResultSet rs = cs.executeQuery();
-		)		
-		{
-			while(rs.next()) {
-			Hospital acc = new Hospital();
-			acc.setID_em(rs.getString("ID_em"));
-			acc.setFullname(rs.getString("Fullname"));
-			acc.setDate_em(rs.getDate("Date_em").toLocalDate());
-			acc.setGender_em(rs.getBoolean("Gender_em"));
-			acc.setAddress_em(rs.getString("Address_em"));
-			acc.setPhone_em(rs.getInt("Phone_em"));
-			acc.setName_majors(rs.getNString("Name_majors"));
-			
-			list_Acc.add(acc);
-			}
+			cs.setBoolean(1, ass.getStatus_ass());
+	
+			cs.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
-		return list_Acc;
+		}
+		public void insertInformation(Assignment ass) {
+			try
+			(
+					Connection connect = DriverManager.getConnection(ConnectDBProperties.getConnectionUrlFromClassPath());
+					CallableStatement cs = connect.prepareCall("{call InsAssignment(?,?,?)}");) {
+			
+				
+				cs.setDate(1, Date.valueOf(ass.getTime_ass()));
+				cs.setBoolean(2, ass.getStatus_ass());
+				cs.setString(3, ass.getID_em());
+				cs.executeUpdate();}
+				
+			 catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		
 	}
+		//-----------------
+		public static boolean getday(Assignment ass) {
+			boolean cl = false;
+			try (
+					var connect = DriverManager.getConnection(ConnectDBProperties.getConnectionUrlFromClassPath());
+					CallableStatement cs = connect.prepareCall("{call select_ass(?,?)}");
+				){
+				
+				cs.setString(2, ass.getID_em());
+				cs.setDate(1, Date.valueOf(ass.getTime_ass()));
+				var rs = cs.executeQuery();
+				if (rs.next()) {
+					cl = true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return cl;
+		}
 }
 
